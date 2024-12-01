@@ -7,7 +7,8 @@ RUN dpkg --add-architecture i386 \
 	&& apt clean \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m -d /home/container container
+RUN groupadd -g 999 docker &&\
+	useradd -m -u 997 -g docker -d /home/container container
 
 USER container
 ENV USER=container HOME=/home/container
